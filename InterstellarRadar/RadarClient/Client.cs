@@ -111,9 +111,27 @@ while (true)
             }
             Console.WriteLine(); // Va a capo alla fine di ogni riga della griglia
         }
+        // Logica fine partita
+        if (energia <= 0)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n>>> GAME OVER: ENERGIA TERMINATA <<<".PadRight(50));
+        }
+        else if (score == 3)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\n>>> VITTORIA: CARBURANTE RECUPERATO! <<<".PadRight(50)); // Stampa la stringa a video e sposta il cursore sulla riga successiva, con PadRight riusciamo ad aggiungere degli spazi.
+        }
     }
     catch
     {
-        // Catch vuoto per evitare crash se il server non risponde per un istante
+        // Se il server non va, entra qui
+        Console.SetCursorPosition(0, 0);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("CONNESSIONE AL SERVER PERSA...".PadRight(50));
     }
+
+    // Thread.Sleep(100): Mette in pausa il programma per 100 millisecondi.
+    // Serve a far girare il gioco a 10 FPS.
+    Thread.Sleep(100);
 }
